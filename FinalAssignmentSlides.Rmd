@@ -1,0 +1,53 @@
+---
+title: "Final Assignment Pitch Slides"
+author: ""
+date: "2/14/2018"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## My app.
+
+This app plots the parabola equation. The parabola usually looks like this:
+
+```{r myplot, fig.align = 'center', fig.cap = 'parabola'}
+x = sort(runif(100,-1,1))
+y = x^2
+plot(x,y, type = "l")
+```
+
+## The Equation.
+
+Perhaps the parabola equation makes you think of this: **y = x^2**
+
+But the full equation is actually this: **y = ax^2 + bx + c**
+
+```{r myequation, echo = TRUE}
+#So if you create some data as follows:
+x = sort(runif(100,-1,1))
+y = x^2   
+
+```
+
+This equation will create a parabola with: 
+
+- parameter a = 1 
+- parameter b = 0
+- parameter c = 0
+
+
+## What do these parameters do?
+Fun things!
+
+- Parameter a will change the direction and width of the parabola
+- Patameter b will skew the parabola
+- Parameter c will shift the parabola
+
+Sounds fun?
+
+## You try!
+
+https://alenarto.shinyapps.io/assignmentapp/

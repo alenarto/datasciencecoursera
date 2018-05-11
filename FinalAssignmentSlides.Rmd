@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ## Next word
 
 This app demonstrates the basic concepts of natural lanaguge prediction. It starts off
-with a rich corpora of news, blog and twitter content from Swift Key. It ends with an app
+with a rich corpora of news, blogs and twitter content from Swift Key. It ends with an app
 that predicts the **next word**, given any text input. 
 ```{r wordcloud, fig.align = 'center', fig.width = 3, fig.height=3,  fig.cap="Hello there, good...", warning=FALSE, message=FALSE}
 library(wordcloud)
@@ -24,11 +24,11 @@ wordcloud(predictions$word, predictions$freqscore,
 
 
 ## The Data
-Text data from blogs, news and twitter are not just text. They include charcters and punctuation that can degrade natural language prediction. To create a *pure* database of language, the text data were processed as follows:
+Text data from blogs, news and twitter are not just text. They include characters and punctuation that can degrade natural language prediction. To create a **pure** database of language, the text data were processed as follows:
 
 - all text was converted to lower case  
 - punctuation and numbers were removed
-- special characters (such as html symbols, emoji characters, formatting) were removed
+- special characters (html symbols, emoji characters, formatting) were removed
 - the text was converted to plain text
 
 

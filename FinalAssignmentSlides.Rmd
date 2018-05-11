@@ -1,7 +1,7 @@
 ---
-title: "Final Assignment Pitch Slides"
+title: "Final Assignment: Natural Language Prediction"
 author: ""
-date: "2/14/2018"
+date: "5/11/2018"
 output: ioslides_presentation
 ---
 
@@ -9,45 +9,43 @@ output: ioslides_presentation
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## My app.
+## Next word
 
-This app plots the parabola equation. The parabola usually looks like this:
-
-```{r myplot, fig.align = 'center', fig.cap = 'parabola'}
-x = sort(runif(100,-1,1))
-y = x^2
-plot(x,y, type = "l")
+This app demonstrates the basic concepts of natural lanaguge prediction. It starts off
+with a rich corpora of news, blog and twitter content from Swift Key. It ends with an app
+that predicts the **next word**, given any text input. 
+```{r wordcloud, fig.align = 'center', fig.width = 3, fig.height=3,  fig.cap="Hello there, good...", warning=FALSE, message=FALSE}
+library(wordcloud)
+predictions <- readRDS("predictions.RDS")
+wordcloud(predictions$word, predictions$freqscore, 
+          colors = brewer.pal(8,"Dark2"),
+          max.words=10, scale=c(3,.2))
 ```
 
-## The Equation.
 
-Perhaps the parabola equation makes you think of this: **y = x^2**
+## The Data
+Text data from blogs, news and twitter are not just text. They include charcters and punctuation that can degrade natural language prediction. To create a *pure* database of language, the text data were processed as follows:
 
-But the full equation is actually this: **y = ax^2 + bx + c**
-
-```{r myequation, echo = TRUE}
-#So if you create some data as follows:
-x = sort(runif(100,-1,1))
-y = x^2   
-
-```
-
-This equation will create a parabola with: 
-
-- parameter a = 1 
-- parameter b = 0
-- parameter c = 0
+- all text was converted to lower case  
+- punctuation and numbers were removed
+- special characters (such as html symbols, emoji characters, formatting) were removed
+- the text was converted to plain text
 
 
-## What do these parameters do?
-Fun things!
+## The Algorithm
+The implemented algorithm makes use of look-up-tables (LUTs) constructed from the text data. This includes three key steps:
 
-- Parameter a will change the direction and width of the parabola
-- Patameter b will skew the parabola
-- Parameter c will shift the parabola
-
-Sounds fun?
+1. **LUT construction** - 5% of the dataset was sampled and converted to n-grams (maximum n=3) that were saved as LUTs, along with their frequencies of occurrence.
+2. **Prediction** - a prediction algorithm was implemented based on these frequencies, using the Stupid backoff algorithm, with default behavior of sampling from unigram frequencies if an effective match could not be made.
+3. The **LUTs** and **prediction** components were wrapped in an interactive shiny app!
 
 ## You try!
 
-https://alenarto.shinyapps.io/assignmentapp/
+Try the app at this [shinyapps link](https://alenarto.shinyapps.io/shinyapp/)  
+
+For more information on natural language prediction:
+
+- excellent tutorial from [stanford](https://cs.stanford.edu/people/eroberts/courses/soco/projects/2004-05/nlp/techniques_word.html)  
+
+- some basics on n-grams from [wikipedia](https://en.wikipedia.org/wiki/N-gram)
+
